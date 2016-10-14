@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <meta charset="UTF-8">
+</head>
+<body>
+<script>
+    $(document).ready(function () {
+        var dizi = [
+            { ay: "Ocak", adet: 1 },
+            { ay: "Şubat", adet: 2 },
+            { ay: "Mart", adet: 3 },
+            { ay: "Nisan", adet: 4 },
+            { ay: "Mayıs", adet: 5 },
+            { ay: "Haziran", adet: 6 },
+            { ay: "Temmuz", adet: 7 },
+            { ay: "Ağustos", adet: 8 },
+            { ay: "Eylül", adet: 9 },
+            { ay: "Ekim", adet: 10 },
+            { ay: "Kasım", adet: 11 },
+            { ay: "Aralık", adet: 12 }, ]
+
+        for (var i = 0 ; i < dizi.length ; i++) {
+            var a = dizi[i].ay;
+            var b = dizi[i].adet;
+            var c = dizi[i].adet * 10;
+            $("#list").append("<li>" + a +"  -  "+ b +" adet  - "+ c+" TL"+"</li>");
+        }
+    })
+
+
+</script>
+<ul id="list">
+</ul>
+</body>
+</html>
