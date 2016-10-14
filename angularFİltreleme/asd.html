@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+
+        var app1 = angular.module("filtre", []);
+        app1.controller("filter", function ($scope) {
+            $scope.first = 0;
+            $scope.last = 2;
+            $scope.names = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+            $scope.ileri = function () {
+                $scope.first += 2;
+                $scope.last += 2;
+            }
+            $scope.geri = function () {
+                $scope.first -= 2;
+                $scope.last -= 2;
+            }
+        });
+        app1.filter("myFilter", function () {
+            return function (names,ilk, son) {
+                var i;
+                var arr = [];
+
+                for (i = ilk ; i < son; i++) {
+                    arr.push(names[i]);
+                }
+                return arr;
+            }
+        });
+
+    </script>
+</head>
+<body>
+
+<div ng-app="filtre" ng-controller="filter">
+    <ul>
+        <li ng-repeat="x in names | myFilter :first :last">{{x}}</li>
+    </ul>
+    <button ng-click="geri()" ng-model="geri1">Geri</button>
+    <button ng-click="ileri()" ng-model="ileri1">İleri</button>
+</div>
+
+</body>
+</html>
