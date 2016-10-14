@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        var myApp = angular.module('myApp', []);
+        myApp.controller('controller', function ($scope) {
+            $scope.secim = "ad";
+            $scope.countries = {
+                "Türkiye": {
+                    ad: "Turkey",
+                    code: 90,},
+                "Brezilya": {
+                    ad: "Brazil",
+                    code: 80,},
+                "Arjantin": {
+                    ad: "Argentina",
+                    code: 85,},
+                "Almanya": {
+                    ad: "Germany",
+                    code: 70,},
+                "Fransa": {
+                    ad: "France",
+                    code: 170,}}});
+        myApp.filter('orderObjectBy', function () {
+            return function (countries, field, reverse) {
+                var filtered = [];
+                angular.forEach(countries, function (countries) {
+                    filtered.push(countries);
+                });
+                filtered = filtered.sort(function (a, b) {
+                    return (a[field] > b[field] ? 1 : -1);
+                });
+
+                return filtered;
+            }
+        });
+    </script>
+</head>
+<body>
+<div ng-app='myApp'>
+    <div ng-controller="controller">
+        <select ng-model="secim">
+            <option value="ad">Ad</option>
+            <option value="code">Kod</option>
+        </select>
+        <ul>
+            <li ng-repeat="country in countries | orderObjectBy:secim">
+                {{country.ad}} -{{country.code}}
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>
