@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ToDo List</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script   src="https://code.jquery.com/jquery-3.1.0.js"   integrity="sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk="   crossorigin="anonymous"></script>
+</head>
+
+<script>
+    var benimapp=angular.module("myapp",[]);
+    benimapp.controller("mycontrol",function ($scope) {
+
+        $scope.deger="";
+
+        $scope.veriler=[{"ad":"mert","soyad":"yavuz","email":"ahmet@hotm.com"},
+                        {"ad":"ahmet","soyad":"yavuz","email":"mert@hotm.com"},
+                        {"ad":"altan","soyad":"yavuz","email":"altan@hotm.com"}];
+
+        $scope.ekle=function () {
+
+            $scope.veriler.push({"ad":$scope.adi,"soyad":$scope.soyadi,"email":$scope.email});
+            $scope.adi="";
+            $scope.soyadi="";
+            $scope.email="";
+        }
+        $scope.sil=function (a) {
+            $scope.veriler.splice(a,1);
+        }
+        $scope.guncelle=function (b) {
+            $scope.adi=$scope.veriler[b].ad;
+            $scope.soyadi=$scope.veriler[b].soyad;
+            $scope.email=$scope.veriler[b].email;
+            $scope.deger=b;
+        }
+        $scope.update=function () {
+            $scope.veriler.splice($scope.deger,1,{"ad":$scope.adi,"soyad":$scope.soyadi,"email":$scope.email});
+            $scope.adi="";
+            $scope.soyadi="";
+            $scope.email="";
+        }
+    });
+</script>
+<body ng-app="myapp" ng-controller="mycontrol">
+<div class="container">
+    <div class="panel">
+      <h2>Üye Formu</h2>
+    </div>
+    <table class="table-hover">
+        <thead>
+            <tr>
+                <th>ad</th>
+                <th>soyad</th>
+                <th>email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><input ng-model="adi" type="text" class="form-control"></td>
+                <td><input ng-model="soyadi" type="text" class="form-control"></td>
+                <td><input ng-model="email" type="text" class="form-control"></td>
+                <td><button   ng-click="ekle()" class="btn-success">üye ekle</button></td>
+                <td><button ng-click="update()" class="btn-primary">Güncelle</button></td>
+            </tr>
+            <tr ng-repeat="veri in veriler">
+                <td>{{veri.ad}}</td>
+                <td>{{veri.soyad}}</td>
+                <td>{{veri.email}}</td>
+                <td><button ng-click="sil($index)" class="btn-danger">Sil</button></td>
+                <td><button ng-click="guncelle($index)" class="btn-primary">Güncelle</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+</body>
+</html>
